@@ -1,0 +1,16 @@
+---
+title: "Kush Desai"
+image: "images/Kush - CV photo (passport size) - COPY.jpg"
+about:
+    template: jolla
+    links:
+        - icon: envelope
+          href: mailto:kushdesai2302@gmail.com
+        - icon: linkedin
+          href: https://www.linkedin.com/in/kush-d/
+
+---
+
+Here is a paragraph about me!
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
