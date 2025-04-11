@@ -11,6 +11,4 @@ about:
 
 ---
 
-Here is a paragraph about me!
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Welcome to my website!
