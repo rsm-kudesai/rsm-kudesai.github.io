@@ -197,7 +197,7 @@ Taken together, the evidence suggests that the treatment and control groups are 
 
 First, I analyze whether matched donations lead to an increased response rate of making a donation. 
 
-```{python}
+```{python,results='show'}
 import pandas as pd
 import scipy.stats as stats
 import statsmodels.api as sm
@@ -206,22 +206,22 @@ import statsmodels.formula.api as smf
 # Load data
 data = pd.read_stata("karlan_list_2007.dta")
 
-# Drop rows with missing values in selected covariates
+# Drop rows with missing values
 subset = data[['mrm2', 'years', 'female', 'nonlit', 'treatment']].dropna()
 
-# T-tests
+# Run t-tests
 t_mrm2 = stats.ttest_ind(subset[subset['treatment'] == 1]['mrm2'], subset[subset['treatment'] == 0]['mrm2'], equal_var=False)
 t_years = stats.ttest_ind(subset[subset['treatment'] == 1]['years'], subset[subset['treatment'] == 0]['years'], equal_var=False)
 t_female = stats.ttest_ind(subset[subset['treatment'] == 1]['female'], subset[subset['treatment'] == 0]['female'], equal_var=False)
 t_nonlit = stats.ttest_ind(subset[subset['treatment'] == 1]['nonlit'], subset[subset['treatment'] == 0]['nonlit'], equal_var=False)
 
-# Regressions
+# Run regressions
 model_mrm2 = smf.ols('mrm2 ~ treatment', data=subset).fit()
 model_years = smf.ols('years ~ treatment', data=subset).fit()
 model_female = smf.ols('female ~ treatment', data=subset).fit()
 model_nonlit = smf.ols('nonlit ~ treatment', data=subset).fit()
 
-# Create a summary table
+# Create and return summary table
 results_table = pd.DataFrame({
     'Variable': ['mrm2', 'years', 'female', 'nonlit'],
     'T-test p-value': [
@@ -244,8 +244,10 @@ results_table = pd.DataFrame({
     ]
 })
 
-# Round for readability
+# Round values for clean output
 results_table = results_table.round(4)
+
+# Display only the table
 results_table
 ```
 
