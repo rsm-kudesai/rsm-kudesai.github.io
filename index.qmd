@@ -1,6 +1,6 @@
 ---
 title: "Kush Desai"
-image: "images/WhatsApp Image 2025-04-11 at 1.04.26 PM.jpeg"
+image: "images/linkedin profile pic.jpeg"
 about:
     template: jolla
     links:
@@ -12,3 +12,4 @@ about:
 ---
 
 Welcome to my website!
+
