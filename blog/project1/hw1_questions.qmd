@@ -22,17 +22,27 @@ This project seeks to replicate their results.
 ```{python}
 import pandas as pd
 
+# Load the dataset
 data = pd.read_stata("karlan_list_2007.dta")
 
+# Get dataset dimensions
 data_shape = data.shape
 
+# Preview first few rows
 data_head = data.head()
 
-data_info = data.info()
+# Clean summary of non-null counts and data types
+data_summary = pd.DataFrame({
+    'Column': data.columns,
+    'Non-Null Count': data.notnull().sum().values,
+    'Dtype': data.dtypes.values
+})
 
+# Basic descriptive statistics for numeric columns
 data_description = data.describe()
 
-data_shape, data_head, data_description
+# Display all in order
+data_shape, data_summary.head, data_description
 ```
 
 The dataset contains 50,083 observations and 51 variables, each representing a prior donor who received a fundraising letter as part of a large-scale field experiment. Each row captures the characteristics of a single solicitation, including the treatment received (e.g., whether a matching grant was offered), attributes of the treatment (such as match ratio and suggested donation amount), and outcomes (e.g., whether the person gave and how much).
@@ -189,40 +199,54 @@ First, I analyze whether matched donations lead to an increased response rate of
 
 ```{python}
 import pandas as pd
-import matplotlib.pyplot as plt
+import scipy.stats as stats
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
 
+# Load data
 data = pd.read_stata("karlan_list_2007.dta")
 
-# Create donation rates
-donation_rates = data.groupby('treatment')['gave'].mean()
-labels = ['Control', 'Treatment']
+# Drop rows with missing values in selected covariates
+subset = data[['mrm2', 'years', 'female', 'nonlit', 'treatment']].dropna()
 
-# Bar plot
-plt.bar(labels, donation_rates, color=['gray', 'blue'])
-plt.ylabel('Proportion Who Donated')
-plt.title('Charitable Contribution Rate by Group')
-plt.ylim(0, 0.05)
-plt.show()
+# T-tests
+t_mrm2 = stats.ttest_ind(subset[subset['treatment'] == 1]['mrm2'], subset[subset['treatment'] == 0]['mrm2'], equal_var=False)
+t_years = stats.ttest_ind(subset[subset['treatment'] == 1]['years'], subset[subset['treatment'] == 0]['years'], equal_var=False)
+t_female = stats.ttest_ind(subset[subset['treatment'] == 1]['female'], subset[subset['treatment'] == 0]['female'], equal_var=False)
+t_nonlit = stats.ttest_ind(subset[subset['treatment'] == 1]['nonlit'], subset[subset['treatment'] == 0]['nonlit'], equal_var=False)
 
-# Drop missing values
-subset = data[['gave', 'treatment']].dropna()
+# Regressions
+model_mrm2 = smf.ols('mrm2 ~ treatment', data=subset).fit()
+model_years = smf.ols('years ~ treatment', data=subset).fit()
+model_female = smf.ols('female ~ treatment', data=subset).fit()
+model_nonlit = smf.ols('nonlit ~ treatment', data=subset).fit()
 
-# T-test
-from scipy.stats import ttest_ind
-t_gave = ttest_ind(
-    subset.loc[subset['treatment'] == 1, 'gave'],
-    subset.loc[subset['treatment'] == 0, 'gave'],
-    equal_var=False
-)
+# Create a summary table
+results_table = pd.DataFrame({
+    'Variable': ['mrm2', 'years', 'female', 'nonlit'],
+    'T-test p-value': [
+        t_mrm2.pvalue,
+        t_years.pvalue,
+        t_female.pvalue,
+        t_nonlit.pvalue
+    ],
+    'Regression Coef (Treatment)': [
+        model_mrm2.params['treatment'],
+        model_years.params['treatment'],
+        model_female.params['treatment'],
+        model_nonlit.params['treatment']
+    ],
+    'Regression p-value': [
+        model_mrm2.pvalues['treatment'],
+        model_years.pvalues['treatment'],
+        model_female.pvalues['treatment'],
+        model_nonlit.pvalues['treatment']
+    ]
+})
 
-# Linear regression
-import statsmodels.formula.api as smf
-model_gave = smf.ols('gave ~ treatment', data=subset).fit()
-
-import statsmodels.api as sm
-# Probit model
-probit_model = smf.probit('gave ~ treatment', data=subset).fit()
-t_gave, model_gave.summary(),probit_model.summary()
+# Round for readability
+results_table = results_table.round(4)
+results_table
 ```
 
 To analyze whether matching donations increased the likelihood of giving, I first plotted the share of donors in the treatment and control groups. The barplot clearly shows a higher proportion of individuals donating in the treatment group.
