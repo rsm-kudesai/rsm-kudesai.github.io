@@ -50,20 +50,24 @@ sns.histplot(
 plt.title("Number of Patents by Customer Status")
 plt.xlabel("Number of Patents")
 plt.ylabel("Firm Count")
-plt.legend(title="Blueprinty Customer", labels=["No", "Yes"])
+plt.legend(title="Blueprinty Customer", labels=["Yes", "No"])
 plt.show()
 
 # Summary statistics
 df.groupby('iscustomer')['patents'].mean()
 ```
 
-The histogram reveals that Blueprinty customers generally tend to have more patents than non-customers. While both groups are right-skewed, the distribution for customers is visibly shifted toward higher patent counts.
+The histogram reveals that Blueprinty customers generally tend to have more patents than non-customers. While both distributions are right-skewed, the customer group is noticeably shifted toward higher patent counts. This is especially evident in the 2–5 patent range, where Blueprinty customers outnumber non-customers in nearly every bin.
 
-Summary statistics confirm this: the average number of patents for customers is **4.13**, compared to **3.47** for non-customers — a meaningful difference of over half a patent on average. Additionally, customers have slightly greater variability in their patent counts, as indicated by the higher standard deviation.
+Summary statistics reinforce this pattern:  
+- **Average patents for customers**: **4.13**  
+- **Average patents for non-customers**: **3.47**  
 
-However, the overlap in distributions and the presence of high-performing non-customers suggests that other variables — such as firm age or region — might also influence patent outcomes. These potential confounders should be controlled for in the regression analysis that follows.
+This difference of over half a patent is non-trivial in the context of count data, and may reflect the value added by using Blueprinty's services. The histogram also suggests that non-customers are more concentrated at the lower end of the patent distribution.
 
-Blueprinty customers are not selected at random. It may be important to account for systematic differences in the age and regional location of customers vs non-customers.
+However, the overlap in distributions and the presence of high-performing non-customers suggest that factors beyond software usage — such as firm age or regional location — may also influence patent activity. These potential confounders motivate the regression analysis that follows, where we can control for these characteristics more explicitly.
+
+Importantly, Blueprinty customers are not randomly assigned. Any observed differences may partially reflect underlying firm characteristics, so caution is warranted when drawing causal conclusions without controlling for such variables.
 
 ```{python}
 # Convert iscustomer to string for cleaner legends
