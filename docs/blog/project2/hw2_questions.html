@@ -243,7 +243,7 @@ window.Quarto = {
 </section>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
-<div id="13b70856" class="cell" data-execution_count="1">
+<div id="c3878f1d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Blueprinty dataset</span></span>
@@ -307,7 +307,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="0672ff8f" class="cell" data-execution_count="2">
+<div id="5224362a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -332,7 +332,7 @@ window.Quarto = {
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Number of Patents by Customer Status"</span>)</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Patents"</span>)</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Firm Count"</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Blueprinty Customer"</span>, labels<span class="op">=</span>[<span class="st">"No"</span>, <span class="st">"Yes"</span>])</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Blueprinty Customer"</span>, labels<span class="op">=</span>[<span class="st">"Yes"</span>, <span class="st">"No"</span>])</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics</span></span>
@@ -351,11 +351,14 @@ window.Quarto = {
 Name: patents, dtype: float64</code></pre>
 </div>
 </div>
-<p>The histogram reveals that Blueprinty customers generally tend to have more patents than non-customers. While both groups are right-skewed, the distribution for customers is visibly shifted toward higher patent counts.</p>
-<p>Summary statistics confirm this: the average number of patents for customers is <strong>4.13</strong>, compared to <strong>3.47</strong> for non-customers — a meaningful difference of over half a patent on average. Additionally, customers have slightly greater variability in their patent counts, as indicated by the higher standard deviation.</p>
-<p>However, the overlap in distributions and the presence of high-performing non-customers suggests that other variables — such as firm age or region — might also influence patent outcomes. These potential confounders should be controlled for in the regression analysis that follows.</p>
-<p>Blueprinty customers are not selected at random. It may be important to account for systematic differences in the age and regional location of customers vs non-customers.</p>
-<div id="bcf51c45" class="cell" data-execution_count="3">
+<p>The histogram reveals that Blueprinty customers generally tend to have more patents than non-customers. While both distributions are right-skewed, the customer group is noticeably shifted toward higher patent counts. This is especially evident in the 2–5 patent range, where Blueprinty customers outnumber non-customers in nearly every bin.</p>
+<p>Summary statistics reinforce this pattern:<br>
+- <strong>Average patents for customers</strong>: <strong>4.13</strong><br>
+- <strong>Average patents for non-customers</strong>: <strong>3.47</strong></p>
+<p>This difference of over half a patent is non-trivial in the context of count data, and may reflect the value added by using Blueprinty’s services. The histogram also suggests that non-customers are more concentrated at the lower end of the patent distribution.</p>
+<p>However, the overlap in distributions and the presence of high-performing non-customers suggest that factors beyond software usage — such as firm age or regional location — may also influence patent activity. These potential confounders motivate the regression analysis that follows, where we can control for these characteristics more explicitly.</p>
+<p>Importantly, Blueprinty customers are not randomly assigned. Any observed differences may partially reflect underlying firm characteristics, so caution is warranted when drawing causal conclusions without controlling for such variables.</p>
+<div id="6cadd40e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert iscustomer to string for cleaner legends</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'iscustomer_str'</span>] <span class="op">=</span> df[<span class="st">'iscustomer'</span>].astype(<span class="bu">str</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -381,7 +384,7 @@ Name: patents, dtype: float64</code></pre>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_1588605/2349405423.py:6: FutureWarning:
+<pre><code>/tmp/ipykernel_1622447/2349405423.py:6: FutureWarning:
 
 
 
@@ -427,7 +430,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 <p><span class="math display">\[
 \ell(\lambda) = -n\lambda + \log(\lambda) \sum Y_i - \sum \log(Y_i!)
 \]</span></p>
-<div id="59a7d506" class="cell" data-execution_count="4">
+<div id="cc474013" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -437,7 +440,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">-</span>np.inf</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(<span class="op">-</span>lambda_ <span class="op">+</span> y <span class="op">*</span> np.log(lambda_) <span class="op">-</span> gammaln(y <span class="op">+</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="be8215a4" class="cell" data-execution_count="5">
+<div id="897fa247" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -481,7 +484,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 -n + \frac{1}{\lambda} \sum Y_i = 0 \quad \Rightarrow \quad \hat{\lambda}_{\text{MLE}} = \frac{1}{n} \sum_{i=1}^n Y_i = \bar{Y}
 \]</span></p>
 <p>This result “feels right” because the mean of a Poisson distribution is <span class="math inline">\(\lambda\)</span>, so the MLE for <span class="math inline">\(\lambda\)</span> is simply the sample mean of the observed counts.</p>
-<div id="e652bf9f" class="cell" data-execution_count="6">
+<div id="8dd78fc8" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative log-likelihood function for optimization</span></span>
@@ -505,7 +508,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 <section id="estimation-of-poisson-regression-model" class="level3">
 <h3 class="anchored" data-anchor-id="estimation-of-poisson-regression-model">Estimation of Poisson Regression Model</h3>
 <p>Next, we extend our simple Poisson model to a Poisson Regression Model such that <span class="math inline">\(Y_i = \text{Poisson}(\lambda_i)\)</span> where <span class="math inline">\(\lambda_i = \exp(X_i'\beta)\)</span>. The interpretation is that the success rate of patent awards is not constant across all firms (<span class="math inline">\(\lambda\)</span>) but rather is a function of firm characteristics <span class="math inline">\(X_i\)</span>. Specifically, we will use the covariates age, age squared, region, and whether the firm is a customer of Blueprinty.</p>
-<div id="e2f4be20" class="cell" data-execution_count="7">
+<div id="70a644c5" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -515,7 +518,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    lambda_ <span class="op">=</span> np.exp(X <span class="op">@</span> beta)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.<span class="bu">sum</span>(<span class="op">-</span>lambda_ <span class="op">+</span> Y <span class="op">*</span> np.log(lambda_) <span class="op">-</span> gammaln(Y <span class="op">+</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d5a2f40e" class="cell" data-execution_count="8">
+<div id="844ffcb1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numdifftools <span class="im">as</span> nd</span>
@@ -559,7 +562,7 @@ L(\lambda) = \prod_{i=1}^{n} \frac{e^{-\lambda} \lambda^{Y_i}}{Y_i!}
 <span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>results_table.<span class="bu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_1588605/4000550630.py:7: RuntimeWarning:
+<pre><code>/tmp/ipykernel_1622447/4000550630.py:7: RuntimeWarning:
 
 overflow encountered in exp
 </code></pre>
@@ -632,7 +635,7 @@ overflow encountered in exp
 </div>
 </div>
 </div>
-<div id="bac27c76" class="cell" data-execution_count="9">
+<div id="e7fc10d1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Reuse your previously constructed X_matrix and Y</span></span>
@@ -720,7 +723,7 @@ overflow encountered in exp
 \]</span></p>
 <p>This means Blueprinty customers are expected to receive approximately <strong>23% more patents</strong> than similar non-customers, after adjusting for age and region.</p>
 <p>Other coefficients behave as expected: - The negative sign on <code>age_centered</code> and <code>age_sq</code> indicates a concave (inverted U-shape) relationship between firm age and patent output. - Regional effects vary but are generally modest and statistically insignificant based on their standard errors.</p>
-<div id="43401fa8" class="cell" data-execution_count="10">
+<div id="c26b5863" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Create counterfactual feature matrices</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X_0 <span class="op">=</span> X.copy()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X_1 <span class="op">=</span> X.copy()</span>
@@ -784,7 +787,7 @@ Variable Definitions
 </div>
 </div>
 </div>
-<div id="782ee981" class="cell" data-execution_count="11">
+<div id="20abca31" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -868,7 +871,7 @@ review_scores_cleanliness                       1.00  </code></pre>
 <li><strong><code>instant_bookable</code></strong> is a binary feature that is included as a potential convenience factor influencing bookings (and hence reviews).</li>
 </ul>
 <p>These insights helped guide our modeling choices. Based on the EDA, we retained features such as <code>log(price)</code>, <code>bedrooms</code>, <code>bathrooms</code>, <code>review_scores_cleanliness</code>, <code>room_type</code>, and <code>instant_bookable</code> in our regression model.</p>
-<div id="782cf68f" class="cell" data-execution_count="12">
+<div id="94fbc88b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
@@ -944,7 +947,7 @@ review_scores_cleanliness                       1.00  </code></pre>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>18:31:00</td>
+<td>19:23:51</td>
 <td data-quarto-table-cell-role="th">Pearson chi2:</td>
 <td>1.43e+06</td>
 </tr>
