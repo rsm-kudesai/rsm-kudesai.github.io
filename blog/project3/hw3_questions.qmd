@@ -300,7 +300,7 @@ import seaborn as sns
 beta_netflix_samples = posterior_samples[:, 0]
 
 # Trace plot
-plt.figure(figsize=(9, 4))
+plt.figure(figsize=(8, 4))
 plt.plot(beta_netflix_samples, linewidth=0.7)
 plt.title("Trace Plot for β_netflix")
 plt.xlabel("Iteration")
