@@ -183,6 +183,7 @@ from scipy.optimize import minimize
 from numpy.linalg import inv
 from scipy.stats import norm
 import pandas as pd
+import numdifftools as nd
 
 def neg_log_likelihood(beta):
     return -mnl_log_likelihood(beta, X, y, group)
