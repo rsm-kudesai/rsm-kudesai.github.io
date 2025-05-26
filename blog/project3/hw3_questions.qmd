@@ -365,30 +365,30 @@ posterior_summary
 
 ### Comparison: MLE vs. Bayesian Posterior Estimates
 
-We compare the parameter estimates from Maximum Likelihood Estimation (MLE) and Bayesian Metropolis-Hastings sampling. Both approaches recover the same model structure, but they quantify uncertainty differently: MLE uses confidence intervals derived from the inverse Hessian, while Bayesian methods use credible intervals based on posterior quantiles.
+We compare the parameter estimates obtained from Maximum Likelihood Estimation (MLE) with those from a Bayesian Metropolis-Hastings sampler. Both approaches use the same data and model structure, but differ in how they quantify uncertainty.
 
 | Parameter    | MLE Estimate | 95% CI (MLE)         | Posterior Mean | 95% CI (Bayes)        |
 |--------------|--------------|----------------------|----------------|------------------------|
-| β_netflix    | 0.6655       | [0.4994, 0.8315]     | 0.6607         | [0.5002, 0.8227]       |
-| β_prime      | 0.3289       | [0.1569, 0.5009]     | 0.3225         | [0.1546, 0.4767]       |
-| β_ads        | –0.4749      | [–0.6086, –0.3412]   | –0.4766        | [–0.6163, –0.3393]     |
-| β_price      | –0.0637      | [–0.0723, –0.0550]   | –0.0640        | [–0.0730, –0.0552]     |
+| β_netflix    | 0.6655       | [0.4994, 0.8315]     | 0.6607         | [0.5024, 0.8227]       |
+| β_prime      | 0.3289       | [0.1569, 0.5009]     | 0.3279         | [0.1546, 0.5126]       |
+| β_ads        | –0.4749      | [–0.6086, –0.3412]   | –0.4776        | [–0.6163, –0.3393]     |
+| β_price      | –0.0637      | [–0.0723, –0.0550]   | –0.0636        | [–0.0726, –0.0552]     |
 
 **Observations:**
-- Posterior means are nearly identical to the MLE estimates, indicating high agreement between the methods.
-- The Bayesian credible intervals are slightly wider in some cases, particularly for β_ads, reflecting more conservative uncertainty from the posterior distribution.
-- All estimates fall close to the true simulation values:  
+- Posterior means are nearly identical to the MLE point estimates, demonstrating strong agreement between methods.
+- Bayesian credible intervals are slightly wider, particularly for β_ads, reflecting more conservative uncertainty.
+- All parameter estimates are close to the true values used in simulation:
   β_netflix = 1.0, β_prime = 0.5, β_ads = –0.8, β_price = –0.1
-- Both methods confirm:  
-  - Consumers prefer Netflix and Prime over Hulu  
-  - Ads decrease utility  
-  - Higher prices reduce utility
+- Both methods indicate:
+  - Consumers strongly prefer Netflix and Prime over Hulu (the reference)
+  - Ads significantly reduce utility
+  - Higher prices are associated with lower choice probability
 
-This agreement confirms the reliability of both frequentist and Bayesian inference for recovering true consumer preferences in a multinomial logit framework.
+These results show that both MLE and Bayesian methods are reliable and produce consistent, interpretable estimates of consumer preferences. The Bayesian framework provides additional insight by directly modeling uncertainty through the posterior distribution.
 
 ## 6. Discussion
 
-Suppose we did not simulate the data and instead received it from a real conjoint experiment. The estimated coefficients from both the MLE and Bayesian approaches suggest meaningful patterns in consumer preferences.
+Suppose we did not simulate the data and instead received it from a real conjoint experiment. The estimated coefficients from both the MLE and Bayesian methods reveal clear and interpretable consumer preferences.
 
 ### Brand Preferences
 
@@ -398,7 +398,7 @@ $$
 \beta_{\text{Netflix}} > \beta_{\text{Prime}} > 0
 $$
 
-This indicates that consumers, on average, prefer **Netflix** the most, followed by **Prime**, with **Hulu** (the reference brand) being the least preferred. The magnitude of the coefficients reflects the strength of preference: choosing Netflix adds the most to utility, Prime adds less, and Hulu adds nothing by definition.
+This means that, on average, consumers prefer **Netflix** the most, followed by **Prime**, with **Hulu** (the omitted baseline) being least preferred. The strength of these coefficients reflects how much utility each brand adds.
 
 ### Ad Preferences
 
@@ -408,48 +408,53 @@ $$
 \beta_{\text{ads}} < 0
 $$
 
-confirms that consumers dislike advertisements. This aligns with intuition — ad-free experiences are more appealing, and ads reduce perceived utility.
+suggests that consumers dislike advertisements. This aligns with intuition — ad-supported options reduce perceived quality and overall utility.
 
 ### Price Sensitivity
 
-The estimate for price:
+We also observe:
 
 $$
 \beta_{\text{price}} < 0
 $$
 
-is also consistent with economic theory. All else equal, consumers are less likely to choose more expensive alternatives, indicating price sensitivity.
+which aligns with economic theory: consumers prefer lower-priced options, all else equal. Price-sensitive behavior is consistent with real-world consumer decision-making.
 
 ---
 
-These effects are all directionally and behaviorally plausible. Even if we didn’t know the data were simulated, we would conclude that:
-- Consumers prefer ad-free, lower-priced streaming services
-- Brand identity strongly influences choice (Netflix is most preferred)
-- All parameters are statistically significant and aligned with real-world expectations
+All estimated effects are statistically significant and directionally plausible. Even if we did not know the data were simulated, we would reasonably conclude:
+- Consumers value ad-free, affordable services
+- Brand identity plays a strong role, with Netflix dominating preference
+- Ads and high prices deter choice
 
-This confirms that the MNL model captures meaningful, interpretable relationships — not just statistically valid, but also behaviorally sensible.
+These conclusions are reinforced by the strong agreement between MLE and Bayesian estimates.
 
 ---
 
 ### Simulating and Estimating a Multi-Level Model
 
-In our estimated MNL model, we assumed all individuals share the same set of preference parameters (fixed βs). But in practice, **consumer preferences are heterogeneous** — people differ in how they value brand, ads, or price.
+In our estimated MNL model, all respondents were assumed to share the same preference parameters. But in real-world settings, **consumer heterogeneity** is the norm — different individuals care differently about brand, ads, or price.
 
-To simulate a hierarchical or multi-level model, we would assign each individual their own part-worth vector:
+To simulate from a multi-level model, we would allow each respondent \( i \) to have their own set of part-worths:
 
 $$
 \beta_i \sim \mathcal{N}(\mu, \Sigma)
 $$
 
 Where:
-- \(\mu\) is the mean preference vector across the population
-- \(\Sigma\) is the covariance matrix capturing variation in preferences
+- \( \mu \): average preference across the population
+- \( \Sigma \): variation in preferences across individuals
 
-We would then simulate each individual's choices using their own \(\beta_i\), introducing realistic heterogeneity.
+We would then:
+- Draw each individual's β from that distribution
+- Simulate their choices using their own β values
 
-To estimate such a model:
-- We would recover both \(\mu\) and \(\Sigma\)
-- We may also recover the individual \(\beta_i\) values (latent variables)
-- This would require either **Bayesian hierarchical modeling** (via MCMC) or **simulated maximum likelihood** methods
+To estimate such a model from data, we would recover both:
+- The distribution of preferences (i.e., \( \mu \), \( \Sigma \))
+- And possibly the respondent-specific βs
 
-Multi-level models add complexity but offer greater flexibility and realism. They allow us to capture consumer-level variation, personalize predictions, and better reflect what’s observed in real-world conjoint data.
+This is typically done using:
+- **Bayesian hierarchical modeling** (via MCMC), or
+- **Simulated maximum likelihood** with random coefficients
+
+While more computationally intensive, multi-level models better capture individual variation, improve personalization, and offer richer insight for real-world conjoint analysis.
