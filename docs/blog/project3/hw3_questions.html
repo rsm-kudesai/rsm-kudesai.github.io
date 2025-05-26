@@ -279,7 +279,7 @@ Note
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="04c6da24" class="cell" data-execution_count="1">
+<div id="51194bb2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -417,7 +417,7 @@ Note
 <section id="preparing-the-data-for-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="preparing-the-data-for-estimation">3. Preparing the Data for Estimation</h2>
 <p>The “hard part” of the MNL likelihood function is organizing the data, as we need to keep track of 3 dimensions (consumer <span class="math inline">\(i\)</span>, covariate <span class="math inline">\(k\)</span>, and product <span class="math inline">\(j\)</span>) instead of the typical 2 dimensions for cross-sectional regression models (consumer <span class="math inline">\(i\)</span> and covariate <span class="math inline">\(k\)</span>). The fact that each task for each respondent has the same number of alternatives (3) helps. In addition, we need to convert the categorical variables for brand and ads into binary variables.</p>
-<div id="c5bb0594" class="cell" data-execution_count="2">
+<div id="d73283ce" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,7 +448,7 @@ Note
 </section>
 <section id="estimation-via-maximum-likelihood" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-maximum-likelihood">4. Estimation via Maximum Likelihood</h2>
-<div id="d628b42b" class="cell" data-execution_count="3">
+<div id="3ce81288" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> logsumexp</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mnl_log_likelihood(beta, X, y, group):</span>
@@ -462,7 +462,7 @@ Note
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        log_likelihood <span class="op">+=</span> np.<span class="bu">sum</span>(y_g <span class="op">*</span> log_probs)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log_likelihood</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="0c477a22" class="cell" data-execution_count="4">
+<div id="6ec2fa48" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> inv</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
@@ -597,7 +597,7 @@ Note
 </section>
 <section id="estimation-via-bayesian-methods" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-via-bayesian-methods">5. Estimation via Bayesian Methods</h2>
-<div id="b9a1fc7c" class="cell" data-execution_count="5">
+<div id="65d1973d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Log-prior function</span></span>
@@ -642,7 +642,7 @@ Note
 <span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Retain only posterior draws after burn-in</span></span>
 <span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>posterior_samples <span class="op">=</span> samples[burn_in:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8a8acf3d" class="cell" data-execution_count="6">
+<div id="a005b177" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -683,7 +683,7 @@ Note
 <p><strong>Posterior histograms</strong>: - All posteriors are unimodal and approximately symmetric. - The posterior means fall near the true part-worth values used to simulate the data. - For example, β_netflix has a posterior centered around ~0.66, confirming the preference for Netflix over the baseline (Hulu).</p>
 <p>These plots confirm that: - The MCMC sampler is functioning correctly - The posterior draws are representative of the underlying parameter uncertainty - The inferred preferences (e.g., dislike of ads, sensitivity to price, brand preferences) are well-supported by the data</p>
 <p>Together, these diagnostics validate the Bayesian estimation approach and provide visual support for the numerical posterior summaries reported earlier.</p>
-<div id="d3f74774" class="cell" data-execution_count="7">
+<div id="ae8a8686" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -765,7 +765,7 @@ Note
 </section>
 <section id="comparison-mle-vs.-bayesian-posterior-estimates" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-mle-vs.-bayesian-posterior-estimates">Comparison: MLE vs.&nbsp;Bayesian Posterior Estimates</h3>
-<p>We compare the parameter estimates from Maximum Likelihood Estimation (MLE) and Bayesian Metropolis-Hastings sampling. Both approaches recover the same model structure, but they quantify uncertainty differently: MLE uses confidence intervals derived from the inverse Hessian, while Bayesian methods use credible intervals based on posterior quantiles.</p>
+<p>We compare the parameter estimates obtained from Maximum Likelihood Estimation (MLE) with those from a Bayesian Metropolis-Hastings sampler. Both approaches use the same data and model structure, but differ in how they quantify uncertainty.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 15%">
@@ -789,49 +789,45 @@ Note
 <td>0.6655</td>
 <td>[0.4994, 0.8315]</td>
 <td>0.6607</td>
-<td>[0.5002, 0.8227]</td>
+<td>[0.5024, 0.8227]</td>
 </tr>
 <tr class="even">
 <td>β_prime</td>
 <td>0.3289</td>
 <td>[0.1569, 0.5009]</td>
-<td>0.3225</td>
-<td>[0.1546, 0.4767]</td>
+<td>0.3279</td>
+<td>[0.1546, 0.5126]</td>
 </tr>
 <tr class="odd">
 <td>β_ads</td>
 <td>–0.4749</td>
 <td>[–0.6086, –0.3412]</td>
-<td>–0.4766</td>
+<td>–0.4776</td>
 <td>[–0.6163, –0.3393]</td>
 </tr>
 <tr class="even">
 <td>β_price</td>
 <td>–0.0637</td>
 <td>[–0.0723, –0.0550]</td>
-<td>–0.0640</td>
-<td>[–0.0730, –0.0552]</td>
+<td>–0.0636</td>
+<td>[–0.0726, –0.0552]</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Observations:</strong> - Posterior means are nearly identical to the MLE estimates, indicating high agreement between the methods. - The Bayesian credible intervals are slightly wider in some cases, particularly for β_ads, reflecting more conservative uncertainty from the posterior distribution. - All estimates fall close to the true simulation values:<br>
-β_netflix = 1.0, β_prime = 0.5, β_ads = –0.8, β_price = –0.1 - Both methods confirm:<br>
-- Consumers prefer Netflix and Prime over Hulu<br>
-- Ads decrease utility<br>
-- Higher prices reduce utility</p>
-<p>This agreement confirms the reliability of both frequentist and Bayesian inference for recovering true consumer preferences in a multinomial logit framework.</p>
+<p><strong>Observations:</strong> - Posterior means are nearly identical to the MLE point estimates, demonstrating strong agreement between methods. - Bayesian credible intervals are slightly wider, particularly for β_ads, reflecting more conservative uncertainty. - All parameter estimates are close to the true values used in simulation: β_netflix = 1.0, β_prime = 0.5, β_ads = –0.8, β_price = –0.1 - Both methods indicate: - Consumers strongly prefer Netflix and Prime over Hulu (the reference) - Ads significantly reduce utility - Higher prices are associated with lower choice probability</p>
+<p>These results show that both MLE and Bayesian methods are reliable and produce consistent, interpretable estimates of consumer preferences. The Bayesian framework provides additional insight by directly modeling uncertainty through the posterior distribution.</p>
 </section>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">6. Discussion</h2>
-<p>Suppose we did not simulate the data and instead received it from a real conjoint experiment. The estimated coefficients from both the MLE and Bayesian approaches suggest meaningful patterns in consumer preferences.</p>
+<p>Suppose we did not simulate the data and instead received it from a real conjoint experiment. The estimated coefficients from both the MLE and Bayesian methods reveal clear and interpretable consumer preferences.</p>
 <section id="brand-preferences" class="level3">
 <h3 class="anchored" data-anchor-id="brand-preferences">Brand Preferences</h3>
 <p>We observe that:</p>
 <p><span class="math display">\[
 \beta_{\text{Netflix}} &gt; \beta_{\text{Prime}} &gt; 0
 \]</span></p>
-<p>This indicates that consumers, on average, prefer <strong>Netflix</strong> the most, followed by <strong>Prime</strong>, with <strong>Hulu</strong> (the reference brand) being the least preferred. The magnitude of the coefficients reflects the strength of preference: choosing Netflix adds the most to utility, Prime adds less, and Hulu adds nothing by definition.</p>
+<p>This means that, on average, consumers prefer <strong>Netflix</strong> the most, followed by <strong>Prime</strong>, with <strong>Hulu</strong> (the omitted baseline) being least preferred. The strength of these coefficients reflects how much utility each brand adds.</p>
 </section>
 <section id="ad-preferences" class="level3">
 <h3 class="anchored" data-anchor-id="ad-preferences">Ad Preferences</h3>
@@ -839,31 +835,32 @@ Note
 <p><span class="math display">\[
 \beta_{\text{ads}} &lt; 0
 \]</span></p>
-<p>confirms that consumers dislike advertisements. This aligns with intuition — ad-free experiences are more appealing, and ads reduce perceived utility.</p>
+<p>suggests that consumers dislike advertisements. This aligns with intuition — ad-supported options reduce perceived quality and overall utility.</p>
 </section>
 <section id="price-sensitivity" class="level3">
 <h3 class="anchored" data-anchor-id="price-sensitivity">Price Sensitivity</h3>
-<p>The estimate for price:</p>
+<p>We also observe:</p>
 <p><span class="math display">\[
 \beta_{\text{price}} &lt; 0
 \]</span></p>
-<p>is also consistent with economic theory. All else equal, consumers are less likely to choose more expensive alternatives, indicating price sensitivity.</p>
+<p>which aligns with economic theory: consumers prefer lower-priced options, all else equal. Price-sensitive behavior is consistent with real-world consumer decision-making.</p>
 <hr>
-<p>These effects are all directionally and behaviorally plausible. Even if we didn’t know the data were simulated, we would conclude that: - Consumers prefer ad-free, lower-priced streaming services - Brand identity strongly influences choice (Netflix is most preferred) - All parameters are statistically significant and aligned with real-world expectations</p>
-<p>This confirms that the MNL model captures meaningful, interpretable relationships — not just statistically valid, but also behaviorally sensible.</p>
+<p>All estimated effects are statistically significant and directionally plausible. Even if we did not know the data were simulated, we would reasonably conclude: - Consumers value ad-free, affordable services - Brand identity plays a strong role, with Netflix dominating preference - Ads and high prices deter choice</p>
+<p>These conclusions are reinforced by the strong agreement between MLE and Bayesian estimates.</p>
 <hr>
 </section>
 <section id="simulating-and-estimating-a-multi-level-model" class="level3">
 <h3 class="anchored" data-anchor-id="simulating-and-estimating-a-multi-level-model">Simulating and Estimating a Multi-Level Model</h3>
-<p>In our estimated MNL model, we assumed all individuals share the same set of preference parameters (fixed βs). But in practice, <strong>consumer preferences are heterogeneous</strong> — people differ in how they value brand, ads, or price.</p>
-<p>To simulate a hierarchical or multi-level model, we would assign each individual their own part-worth vector:</p>
+<p>In our estimated MNL model, all respondents were assumed to share the same preference parameters. But in real-world settings, <strong>consumer heterogeneity</strong> is the norm — different individuals care differently about brand, ads, or price.</p>
+<p>To simulate from a multi-level model, we would allow each respondent ( i ) to have their own set of part-worths:</p>
 <p><span class="math display">\[
 \beta_i \sim \mathcal{N}(\mu, \Sigma)
 \]</span></p>
-<p>Where: - () is the mean preference vector across the population - () is the covariance matrix capturing variation in preferences</p>
-<p>We would then simulate each individual’s choices using their own (_i), introducing realistic heterogeneity.</p>
-<p>To estimate such a model: - We would recover both () and () - We may also recover the individual (_i) values (latent variables) - This would require either <strong>Bayesian hierarchical modeling</strong> (via MCMC) or <strong>simulated maximum likelihood</strong> methods</p>
-<p>Multi-level models add complexity but offer greater flexibility and realism. They allow us to capture consumer-level variation, personalize predictions, and better reflect what’s observed in real-world conjoint data.</p>
+<p>Where: - ( ): average preference across the population - ( ): variation in preferences across individuals</p>
+<p>We would then: - Draw each individual’s β from that distribution - Simulate their choices using their own β values</p>
+<p>To estimate such a model from data, we would recover both: - The distribution of preferences (i.e., ( ), ( )) - And possibly the respondent-specific βs</p>
+<p>This is typically done using: - <strong>Bayesian hierarchical modeling</strong> (via MCMC), or - <strong>Simulated maximum likelihood</strong> with random coefficients</p>
+<p>While more computationally intensive, multi-level models better capture individual variation, improve personalization, and offer richer insight for real-world conjoint analysis.</p>
 
 
 </section>
