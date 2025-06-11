@@ -244,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Repeat until convergence</li>
 </ol>
-<div id="7a5e3f0a" class="cell" data-execution_count="1">
+<div id="d4784042" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -312,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparison-with-scikit-learns-kmeans" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-with-scikit-learns-kmeans">Comparison with <code>scikit-learn</code>’s <code>KMeans</code></h3>
 <p>The clustering results from both methods were nearly identical, confirming the correctness of our custom implementation.</p>
-<div id="e5dc3e92" class="cell" data-execution_count="2">
+<div id="8909def2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Built-in KMeans clustering for comparison</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_scaled)</span>
@@ -353,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Silhouette Score</strong> – evaluating cluster separation and cohesion</li>
 </ol>
 <p>We calculated both metrics for <code>K = 2</code> through <code>K = 7</code>.</p>
-<div id="b1dfe133" class="cell" data-execution_count="3">
+<div id="d3803eb1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -427,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="k-means-cluster-visualizations" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-cluster-visualizations">K-Means Cluster Visualizations</h2>
 <p>Below are the clustering results for different values of K, from 2 to 7. Each figure shows the decision boundaries and centroids.</p>
-<div id="d5c58887" class="cell" data-execution_count="4">
+<div id="8a3cfa99" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_values:</span>
@@ -492,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="k-means-clustering-animation" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-clustering-animation">K-Means Clustering Animation</h2>
 <p>To visually demonstrate how K-means iteratively refines clusters, we created an animation showing how the centroids move and cluster assignments evolve.</p>
-<div id="8b7d01d3" class="cell" data-execution_count="5">
+<div id="2c7ec411" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Warning: </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss"> not found!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_311385/3126208424.py:11: DeprecationWarning:
+<pre><code>/tmp/ipykernel_358173/3126208424.py:11: DeprecationWarning:
 
 Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
 </code></pre>
@@ -544,105 +544,88 @@ Starting with ImageIO v3 the behavior of this function will switch to that of ii
 </section>
 <section id="methods-used" class="level3">
 <h3 class="anchored" data-anchor-id="methods-used">Methods Used</h3>
-<p>We included the following variable importance techniques:</p>
+<p>To measure importance, we implemented <strong>seven complementary metrics</strong>:</p>
 <ul>
-<li><strong>Pearson Correlation</strong> — assesses the linear relationship between each predictor and satisfaction.</li>
-<li><strong>Standardized Regression Coefficients</strong> — obtained from a linear regression using z-scored variables.</li>
-<li><strong>Usefulness (∆R²)</strong> — drop-one-out approach measuring R² reduction if a variable is removed.</li>
-<li><strong>Shapley Values (LMG)</strong> — computed using permutation importance on a linear model.</li>
-<li><strong>Johnson’s Relative Weights (Epsilon)</strong> — based on squared structure coefficients.</li>
-<li><strong>Gini Importance</strong> — extracted from a Random Forest model.</li>
-<li><strong>XGBoost Permutation Importance</strong> — calculated on an XGBoost regressor using scikit-learn’s permutation importance utility.</li>
+<li><strong>Pearson R²</strong> – R² from a simple linear regression (squared correlation)</li>
+<li><strong>Standardized Coefficients</strong> – from a linear model using z-scored predictors</li>
+<li><strong>Usefulness (ΔR²)</strong> – change in model R² when a predictor is excluded</li>
+<li><strong>Shapley Values (LMG)</strong> – computed via permutation importance in a linear model</li>
+<li><strong>Johnson’s Relative Weights (Epsilon)</strong> – using squared structure coefficients</li>
+<li><strong>Gini Importance</strong> – from a Random Forest</li>
+<li><strong>XGBoost Importance</strong> – from <code>get_booster().get_score(importance_type="gain")</code></li>
 </ul>
-<p>Each metric provides a different lens on variable influence, allowing us to triangulate which predictors consistently emerge as key drivers of satisfaction.</p>
-<div id="411ed3a5" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Click to expand full driver analysis code</summary>
+<p>We standardized the data and computed each metric systematically, storing the results in a comparative table for interpretation.</p>
+<hr>
+<div id="d6564503" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"data_for_drivers_analysis.csv"</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct 'satisfaction' as the target variable instead of 'y'</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"satisfaction"</span>, <span class="st">"id"</span>, <span class="st">"brand"</span>])</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"satisfaction"</span>]</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize variables</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> pd.DataFrame(scaler.fit_transform(X), columns<span class="op">=</span>X.columns)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>y_scaled <span class="op">=</span> StandardScaler().fit_transform(y.values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)).ravel()</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson correlations</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>pearson_corrs <span class="op">=</span> [pearsonr(X[col], y)[<span class="dv">0</span>] <span class="cf">for</span> col <span class="kw">in</span> X.columns]</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized regression coefficients</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression().fit(X_scaled, y_scaled)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>standardized_coefs <span class="op">=</span> reg.coef_</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Usefulness: change in R^2 when a variable is dropped</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>base_r2 <span class="op">=</span> r2_score(y_scaled, reg.predict(X_scaled))</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>usefulness <span class="op">=</span> []</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> X.columns:</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    temp_X <span class="op">=</span> X_scaled.drop(columns<span class="op">=</span>col)</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    temp_model <span class="op">=</span> LinearRegression().fit(temp_X, y_scaled)</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    temp_r2 <span class="op">=</span> r2_score(y_scaled, temp_model.predict(temp_X))</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    usefulness.append(base_r2 <span class="op">-</span> temp_r2)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapley values approximation using permutation importance on a linear model</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>shap_model <span class="op">=</span> LinearRegression().fit(X_scaled, y_scaled)</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>shap_importance <span class="op">=</span> permutation_importance(shap_model, X_scaled, y_scaled, n_repeats<span class="op">=</span><span class="dv">30</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>shap_values <span class="op">=</span> shap_importance.importances_mean</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Johnson’s relative weights approximation using squared structure coefficients</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">=</span> np.corrcoef(X_scaled.T)</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eig(cor_matrix)</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>structure_coeffs <span class="op">=</span> np.corrcoef(X_scaled.T, reg.predict(X_scaled))[<span class="dv">0</span>:X.shape[<span class="dv">1</span>], <span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>epsilon_weights <span class="op">=</span> (structure_coeffs <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> np.var(X_scaled, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>epsilon_weights <span class="op">=</span> epsilon_weights <span class="op">/</span> epsilon_weights.<span class="bu">sum</span>()</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Random forest Gini importance</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>rf.fit(X_scaled, y_scaled)</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>gini_importance <span class="op">=</span> rf.feature_importances_</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all metrics into a table</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Variable"</span>: X.columns,</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson Corr"</span>: np.<span class="bu">round</span>(pearson_corrs, <span class="dv">3</span>),</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Standardized Coef"</span>: np.<span class="bu">round</span>(standardized_coefs, <span class="dv">3</span>),</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Usefulness (∆R²)"</span>: np.<span class="bu">round</span>(usefulness, <span class="dv">3</span>),</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Shapley (LMG)"</span>: np.<span class="bu">round</span>(shap_values, <span class="dv">3</span>),</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Johnson's Epsilon"</span>: np.<span class="bu">round</span>(epsilon_weights, <span class="dv">3</span>),</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gini Importance"</span>: np.<span class="bu">round</span>(gini_importance, <span class="dv">3</span>)</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> results_df.sort_values(by<span class="op">=</span><span class="st">"Gini Importance"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div id="d55730b4" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit XGBoost model</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>xgb_model <span class="op">=</span> xgb.XGBRegressor(objective<span class="op">=</span><span class="st">"reg:squarederror"</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>xgb_model.fit(X_scaled, y_scaled)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Permutation importance on XGBoost</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>perm_importance <span class="op">=</span> permutation_importance(xgb_model, X_scaled, y_scaled, n_repeats<span class="op">=</span><span class="dv">30</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>perm_scores <span class="op">=</span> perm_importance.importances_mean</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Append to results table</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>results_df[<span class="st">"XGB Permutation Importance"</span>] <span class="op">=</span> np.<span class="bu">round</span>(perm_scores, <span class="dv">3</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by one of the new metrics if preferred</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> results_df.sort_values(by<span class="op">=</span><span class="st">"Pearson Corr"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>display(results_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">"satisfaction"</span>, <span class="st">"id"</span>, <span class="st">"brand"</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">"satisfaction"</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize predictors and target</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> pd.DataFrame(scaler.fit_transform(X), columns<span class="op">=</span>X.columns)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>y_scaled <span class="op">=</span> StandardScaler().fit_transform(y.values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)).ravel()</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Pearson R² via simple regression</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>pearson_r2 <span class="op">=</span> [r2_score(y, LinearRegression().fit(X[[col]], y).predict(X[[col]])) <span class="cf">for</span> col <span class="kw">in</span> X.columns]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized regression coefficients</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> LinearRegression().fit(X_scaled, y_scaled)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>standardized_coefs <span class="op">=</span> reg.coef_</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Usefulness (∆R² when variable removed)</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>base_r2 <span class="op">=</span> r2_score(y_scaled, reg.predict(X_scaled))</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>usefulness <span class="op">=</span> []</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> X.columns:</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    temp_X <span class="op">=</span> X_scaled.drop(columns<span class="op">=</span>col)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    temp_model <span class="op">=</span> LinearRegression().fit(temp_X, y_scaled)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    temp_r2 <span class="op">=</span> r2_score(y_scaled, temp_model.predict(temp_X))</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    usefulness.append(base_r2 <span class="op">-</span> temp_r2)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapley approximation via permutation importance</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>shap_model <span class="op">=</span> LinearRegression().fit(X_scaled, y_scaled)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>shap_values <span class="op">=</span> permutation_importance(shap_model, X_scaled, y_scaled, n_repeats<span class="op">=</span><span class="dv">30</span>, random_state<span class="op">=</span><span class="dv">0</span>).importances_mean</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Johnson's relative weights via structure coefficients</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>cor_matrix <span class="op">=</span> np.corrcoef(X_scaled.T)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>structure_coeffs <span class="op">=</span> np.corrcoef(X_scaled.T, reg.predict(X_scaled))[<span class="dv">0</span>:X.shape[<span class="dv">1</span>], <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>epsilon_weights <span class="op">=</span> (structure_coeffs <span class="op">**</span> <span class="dv">2</span>) <span class="op">*</span> np.var(X_scaled, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>epsilon_weights <span class="op">=</span> epsilon_weights <span class="op">/</span> epsilon_weights.<span class="bu">sum</span>()</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Gini importance from Random Forest</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>rf.fit(X_scaled, y_scaled)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>gini_importance <span class="op">=</span> rf.feature_importances_</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co"># XGBoost gain-based importance</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>xgb_model <span class="op">=</span> xgb.XGBRegressor(objective<span class="op">=</span><span class="st">"reg:squarederror"</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>xgb_model.fit(X, y)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>xgb_importance <span class="op">=</span> xgb_model.get_booster().get_score(importance_type<span class="op">=</span><span class="st">"gain"</span>)</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>xgb_importance_series <span class="op">=</span> pd.Series(xgb_importance).reindex(X.columns).fillna(<span class="dv">0</span>)</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>xgb_importance_series <span class="op">/=</span> xgb_importance_series.<span class="bu">sum</span>()</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Final table</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Variable"</span>: X.columns,</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pearson R²"</span>: np.<span class="bu">round</span>(pearson_r2, <span class="dv">3</span>),</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Standardized Coef"</span>: np.<span class="bu">round</span>(standardized_coefs, <span class="dv">3</span>),</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Usefulness (∆R²)"</span>: np.<span class="bu">round</span>(usefulness, <span class="dv">3</span>),</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Shapley (LMG)"</span>: np.<span class="bu">round</span>(shap_values, <span class="dv">3</span>),</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Johnson's Epsilon"</span>: np.<span class="bu">round</span>(epsilon_weights, <span class="dv">3</span>),</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gini Importance"</span>: np.<span class="bu">round</span>(gini_importance, <span class="dv">3</span>),</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">"XGBoost Importance"</span>: np.<span class="bu">round</span>(xgb_importance_series.values, <span class="dv">3</span>)</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>}).sort_values(by<span class="op">=</span><span class="st">"Pearson R²"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>display(results_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -652,114 +635,114 @@ Starting with ImageIO v3 the behavior of this function will switch to that of ii
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Variable</th>
-<th data-quarto-table-cell-role="th">Pearson Corr</th>
+<th data-quarto-table-cell-role="th">Pearson R²</th>
 <th data-quarto-table-cell-role="th">Standardized Coef</th>
 <th data-quarto-table-cell-role="th">Usefulness (∆R²)</th>
 <th data-quarto-table-cell-role="th">Shapley (LMG)</th>
 <th data-quarto-table-cell-role="th">Johnson's Epsilon</th>
 <th data-quarto-table-cell-role="th">Gini Importance</th>
-<th data-quarto-table-cell-role="th">XGB Permutation Importance</th>
+<th data-quarto-table-cell-role="th">XGBoost Importance</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>trust</td>
-<td>0.256</td>
+<td>0.065</td>
 <td>0.116</td>
 <td>0.008</td>
 <td>0.027</td>
 <td>0.156</td>
 <td>0.168</td>
-<td>0.204</td>
+<td>0.290</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>impact</td>
-<td>0.255</td>
+<td>0.065</td>
 <td>0.128</td>
 <td>0.011</td>
 <td>0.033</td>
 <td>0.154</td>
 <td>0.134</td>
-<td>0.134</td>
+<td>0.185</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>service</td>
-<td>0.251</td>
+<td>0.063</td>
 <td>0.088</td>
 <td>0.005</td>
 <td>0.015</td>
 <td>0.150</td>
 <td>0.126</td>
-<td>0.120</td>
+<td>0.111</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>easy</td>
-<td>0.213</td>
+<td>0.045</td>
 <td>0.022</td>
 <td>0.000</td>
 <td>0.001</td>
 <td>0.108</td>
 <td>0.100</td>
-<td>0.140</td>
+<td>0.071</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>appealing</td>
-<td>0.208</td>
+<td>0.043</td>
 <td>0.034</td>
 <td>0.001</td>
 <td>0.003</td>
 <td>0.103</td>
 <td>0.081</td>
-<td>0.178</td>
+<td>0.066</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>rewarding</td>
-<td>0.195</td>
+<td>0.038</td>
 <td>0.005</td>
 <td>0.000</td>
 <td>0.000</td>
 <td>0.090</td>
 <td>0.106</td>
-<td>0.149</td>
+<td>0.065</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>build</td>
-<td>0.192</td>
+<td>0.037</td>
 <td>0.020</td>
 <td>0.000</td>
 <td>0.001</td>
 <td>0.088</td>
 <td>0.100</td>
-<td>0.139</td>
+<td>0.079</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>differs</td>
-<td>0.185</td>
+<td>0.034</td>
 <td>0.028</td>
 <td>0.001</td>
 <td>0.002</td>
 <td>0.081</td>
 <td>0.090</td>
-<td>0.167</td>
+<td>0.056</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>popular</td>
-<td>0.171</td>
+<td>0.029</td>
 <td>0.017</td>
 <td>0.000</td>
 <td>0.000</td>
 <td>0.070</td>
 <td>0.096</td>
-<td>0.143</td>
+<td>0.076</td>
 </tr>
 </tbody>
 </table>
@@ -771,31 +754,42 @@ Starting with ImageIO v3 the behavior of this function will switch to that of ii
 <section id="observations" class="level3">
 <h3 class="anchored" data-anchor-id="observations">Observations</h3>
 <ul>
-<li><strong>trust</strong>, <strong>impact</strong>, and <strong>service</strong> consistently appear as top drivers across all metrics.</li>
-<li>Tree-based models (Random Forest, XGBoost) and permutation-based methods show broader variable importance patterns, while linear techniques are more concentrated.</li>
-<li>The new XGBoost importance metric helps validate the linear models and adds robustness to the conclusions.</li>
+<li><strong>trust</strong>, <strong>impact</strong>, and <strong>service</strong> consistently emerge as top drivers across nearly all methods.</li>
+<li>Tree-based methods (e.g.&nbsp;Random Forest, XGBoost) distribute importance more evenly, but confirm the top 3 variables.</li>
+<li>The new <strong>XGBoost gain-based importance</strong> helps validate prior metrics and adds robustness.</li>
+<li>Linear metrics (Pearson R², Coefficients) provide consistent directional support, while tree-based and Shapley metrics enhance the reliability.</li>
 </ul>
-<p>This comprehensive multi-method analysis strengthens the reliability of the key drivers identified and ensures consistency across modeling approaches.</p>
+<hr>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>This assignment showcased two distinct applications of machine learning:</p>
+<p>This assignment demonstrated two distinct applications of machine learning, using different datasets and techniques:</p>
 <ol type="1">
-<li><p><strong>Unsupervised Learning (K-Means)</strong> – We explored the Palmer Penguins dataset to segment penguins using a custom K-Means algorithm. The iterative visualization helped us understand how centroids shift over time, and our results aligned well with the scikit-learn implementation. Both the <strong>Elbow Method</strong> and <strong>Silhouette Score</strong> pointed to <strong>K = 3</strong> as the optimal number of clusters, consistent with the biological species separation.</p></li>
-<li><p><strong>Supervised Learning (Key Drivers Analysis)</strong> – Using the drivers dataset, we quantified the importance of various predictors for “satisfaction” using multiple techniques: Pearson correlation, standardized regression, usefulness (∆R²), Shapley values, Johnson’s relative weights, and tree-based feature importances. We also extended the analysis using <strong>XGBoost permutation importance</strong>, adding robustness and depth.</p></li>
+<li><p><strong>Unsupervised Learning (K-Means)</strong><br>
+Using the Palmer Penguins dataset, we implemented a custom step-by-step K-means algorithm to segment penguins by bill and flipper length.<br>
+Visualizations showed how centroids move across iterations and how the clusters evolve.<br>
+Both the <strong>Elbow Method</strong> and <strong>Silhouette Score</strong> suggested <strong>K = 3</strong> as the optimal number of clusters, aligning with the biological species structure.<br>
+Our results closely matched the built-in <code>KMeans</code> implementation, validating our logic and code.</p></li>
+<li><p><strong>Supervised Learning (Key Drivers Analysis)</strong><br>
+Using survey data, we explored which perceptions most influence <strong>satisfaction</strong>.<br>
+We employed multiple metrics: <strong>Pearson R²</strong>, <strong>Standardized Coefficients</strong>, <strong>Usefulness (ΔR²)</strong>, <strong>Shapley values</strong>, <strong>Johnson’s relative weights</strong>, and <strong>Gini Importance</strong> from a random forest.<br>
+We also extended the analysis by incorporating <strong>XGBoost Gain Importance</strong>, offering a robust, tree-based comparison.<br>
+All metrics consistently highlighted <code>trust</code>, <code>impact</code>, and <code>service</code> as the most important drivers of satisfaction.</p></li>
 </ol>
 <hr>
 <section id="key-takeaways" class="level3">
 <h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
 <ul>
-<li>Machine learning is not just about prediction – it’s a powerful tool for <strong>explanation and discovery</strong>.</li>
-<li>K-Means is an intuitive unsupervised method, especially effective when visualized step-by-step.</li>
-<li>Key Drivers Analysis provides <strong>actionable insight</strong> into what matters most for influencing outcomes.</li>
-<li>Combining multiple metrics (linear + tree-based + shapley) strengthens the reliability of results.</li>
+<li>Machine learning is a powerful tool for both <strong>explanation</strong> and <strong>discovery</strong>.</li>
+<li><strong>K-means</strong> provides intuitive segmentation, especially when visually stepped through.</li>
+<li><strong>Key Drivers Analysis</strong> reveals what matters most in influencing outcomes, especially when using <strong>multiple complementary methods</strong>.</li>
+<li>The use of <strong>XGBoost</strong> added robustness, while <strong>Shapley values</strong> provided model-agnostic interpretability.</li>
+<li>Combining <strong>linear, tree-based, and permutation-based metrics</strong> improves confidence in the findings.</li>
 </ul>
 <hr>
-<p>Both components of this assignment reinforced how different ML approaches uncover structure in data — whether through clustering or quantifying variable impact. These methods are essential for <strong>segmenting populations</strong> and <strong>prioritizing interventions</strong>, skills valuable in both business and research.</p>
+<p>Together, these projects reinforce the value of machine learning for both <strong>segmentation</strong> and <strong>driver identification</strong>.<br>
+They also highlight the benefit of <strong>triangulating results</strong> across different modeling frameworks to build trust in data-driven decisions.</p>
 
 
 </section>

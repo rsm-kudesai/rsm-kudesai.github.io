@@ -253,50 +253,48 @@ The target variable is **`satisfaction`**, a numeric outcome likely measuring ho
 
 ### Methods Used
 
-We included the following variable importance techniques:
+To measure importance, we implemented **seven complementary metrics**:
 
-- **Pearson Correlation** — assesses the linear relationship between each predictor and satisfaction.
-- **Standardized Regression Coefficients** — obtained from a linear regression using z-scored variables.
-- **Usefulness (∆R²)** — drop-one-out approach measuring R² reduction if a variable is removed.
-- **Shapley Values (LMG)** — computed using permutation importance on a linear model.
-- **Johnson’s Relative Weights (Epsilon)** — based on squared structure coefficients.
-- **Gini Importance** — extracted from a Random Forest model.
-- **XGBoost Permutation Importance** — calculated on an XGBoost regressor using scikit-learn’s permutation importance utility.
+- **Pearson R²** – R² from a simple linear regression (squared correlation)
+- **Standardized Coefficients** – from a linear model using z-scored predictors
+- **Usefulness (ΔR²)** – change in model R² when a predictor is excluded
+- **Shapley Values (LMG)** – computed via permutation importance in a linear model
+- **Johnson’s Relative Weights (Epsilon)** – using squared structure coefficients
+- **Gini Importance** – from a Random Forest
+- **XGBoost Importance** – from `get_booster().get_score(importance_type="gain")`
 
-Each metric provides a different lens on variable influence, allowing us to triangulate which predictors consistently emerge as key drivers of satisfaction.
+We standardized the data and computed each metric systematically, storing the results in a comparative table for interpretation.
+
+---
 
 ```{python}
-#| code-fold: true
-#| code-summary: "Click to expand full driver analysis code"
 import numpy as np
+import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.inspection import permutation_importance
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score
-from scipy.stats import pearsonr
-import pandas as pd
+import xgboost as xgb
 
-# Load the dataset
+# Load data
 df = pd.read_csv("data_for_drivers_analysis.csv")
-
-# Correct 'satisfaction' as the target variable instead of 'y'
 X = df.drop(columns=["satisfaction", "id", "brand"])
 y = df["satisfaction"]
 
-# Standardize variables
+# Standardize predictors and target
 scaler = StandardScaler()
 X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
 y_scaled = StandardScaler().fit_transform(y.values.reshape(-1, 1)).ravel()
 
-# Pearson correlations
-pearson_corrs = [pearsonr(X[col], y)[0] for col in X.columns]
+# Pearson R² via simple regression
+pearson_r2 = [r2_score(y, LinearRegression().fit(X[[col]], y).predict(X[[col]])) for col in X.columns]
 
 # Standardized regression coefficients
 reg = LinearRegression().fit(X_scaled, y_scaled)
 standardized_coefs = reg.coef_
 
-# Usefulness: change in R^2 when a variable is dropped
+# Usefulness (∆R² when variable removed)
 base_r2 = r2_score(y_scaled, reg.predict(X_scaled))
 usefulness = []
 for col in X.columns:
@@ -305,79 +303,78 @@ for col in X.columns:
     temp_r2 = r2_score(y_scaled, temp_model.predict(temp_X))
     usefulness.append(base_r2 - temp_r2)
 
-# Shapley values approximation using permutation importance on a linear model
+# Shapley approximation via permutation importance
 shap_model = LinearRegression().fit(X_scaled, y_scaled)
-shap_importance = permutation_importance(shap_model, X_scaled, y_scaled, n_repeats=30, random_state=0)
-shap_values = shap_importance.importances_mean
+shap_values = permutation_importance(shap_model, X_scaled, y_scaled, n_repeats=30, random_state=0).importances_mean
 
-# Johnson’s relative weights approximation using squared structure coefficients
+# Johnson's relative weights via structure coefficients
 cor_matrix = np.corrcoef(X_scaled.T)
-eigenvalues, eigenvectors = np.linalg.eig(cor_matrix)
 structure_coeffs = np.corrcoef(X_scaled.T, reg.predict(X_scaled))[0:X.shape[1], -1]
 epsilon_weights = (structure_coeffs ** 2) * np.var(X_scaled, axis=0)
 epsilon_weights = epsilon_weights / epsilon_weights.sum()
 
-# Random forest Gini importance
+# Gini importance from Random Forest
 rf = RandomForestRegressor(n_estimators=100, random_state=0)
 rf.fit(X_scaled, y_scaled)
 gini_importance = rf.feature_importances_
 
-# Combine all metrics into a table
+# XGBoost gain-based importance
+xgb_model = xgb.XGBRegressor(objective="reg:squarederror", random_state=0)
+xgb_model.fit(X, y)
+xgb_importance = xgb_model.get_booster().get_score(importance_type="gain")
+xgb_importance_series = pd.Series(xgb_importance).reindex(X.columns).fillna(0)
+xgb_importance_series /= xgb_importance_series.sum()
+
+# Final table
 results_df = pd.DataFrame({
     "Variable": X.columns,
-    "Pearson Corr": np.round(pearson_corrs, 3),
+    "Pearson R²": np.round(pearson_r2, 3),
     "Standardized Coef": np.round(standardized_coefs, 3),
     "Usefulness (∆R²)": np.round(usefulness, 3),
     "Shapley (LMG)": np.round(shap_values, 3),
     "Johnson's Epsilon": np.round(epsilon_weights, 3),
-    "Gini Importance": np.round(gini_importance, 3)
-})
-results_df = results_df.sort_values(by="Gini Importance", ascending=False).reset_index(drop=True)
-```
-
-```{python}
-import xgboost as xgb
-from sklearn.inspection import permutation_importance
-
-# Fit XGBoost model
-xgb_model = xgb.XGBRegressor(objective="reg:squarederror", random_state=0)
-xgb_model.fit(X_scaled, y_scaled)
-
-# Permutation importance on XGBoost
-perm_importance = permutation_importance(xgb_model, X_scaled, y_scaled, n_repeats=30, random_state=0)
-perm_scores = perm_importance.importances_mean
-
-# Append to results table
-results_df["XGB Permutation Importance"] = np.round(perm_scores, 3)
-
-# Sort by one of the new metrics if preferred
-results_df = results_df.sort_values(by="Pearson Corr", ascending=False).reset_index(drop=True)
+    "Gini Importance": np.round(gini_importance, 3),
+    "XGBoost Importance": np.round(xgb_importance_series.values, 3)
+}).sort_values(by="Pearson R²", ascending=False).reset_index(drop=True)
 display(results_df)
 ```
 
 ### Observations
 
-- **trust**, **impact**, and **service** consistently appear as top drivers across all metrics.
-- Tree-based models (Random Forest, XGBoost) and permutation-based methods show broader variable importance patterns, while linear techniques are more concentrated.
-- The new XGBoost importance metric helps validate the linear models and adds robustness to the conclusions.
+- **trust**, **impact**, and **service** consistently emerge as top drivers across nearly all methods.
+- Tree-based methods (e.g. Random Forest, XGBoost) distribute importance more evenly, but confirm the top 3 variables.
+- The new **XGBoost gain-based importance** helps validate prior metrics and adds robustness.
+- Linear metrics (Pearson R², Coefficients) provide consistent directional support, while tree-based and Shapley metrics enhance the reliability.
 
-This comprehensive multi-method analysis strengthens the reliability of the key drivers identified and ensures consistency across modeling approaches.
+---
 
 ## Conclusion
 
-This assignment showcased two distinct applications of machine learning:
+This assignment demonstrated two distinct applications of machine learning, using different datasets and techniques:
 
-1. **Unsupervised Learning (K-Means)** – We explored the Palmer Penguins dataset to segment penguins using a custom K-Means algorithm. The iterative visualization helped us understand how centroids shift over time, and our results aligned well with the scikit-learn implementation. Both the **Elbow Method** and **Silhouette Score** pointed to **K = 3** as the optimal number of clusters, consistent with the biological species separation.
+1. **Unsupervised Learning (K-Means)**  
+   Using the Palmer Penguins dataset, we implemented a custom step-by-step K-means algorithm to segment penguins by bill and flipper length.  
+   Visualizations showed how centroids move across iterations and how the clusters evolve.  
+   Both the **Elbow Method** and **Silhouette Score** suggested **K = 3** as the optimal number of clusters, aligning with the biological species structure.  
+   Our results closely matched the built-in `KMeans` implementation, validating our logic and code.
 
-2. **Supervised Learning (Key Drivers Analysis)** – Using the drivers dataset, we quantified the importance of various predictors for "satisfaction" using multiple techniques: Pearson correlation, standardized regression, usefulness (∆R²), Shapley values, Johnson’s relative weights, and tree-based feature importances. We also extended the analysis using **XGBoost permutation importance**, adding robustness and depth.
+2. **Supervised Learning (Key Drivers Analysis)**  
+   Using survey data, we explored which perceptions most influence **satisfaction**.  
+   We employed multiple metrics: **Pearson R²**, **Standardized Coefficients**, **Usefulness (ΔR²)**, **Shapley values**, **Johnson’s relative weights**, and **Gini Importance** from a random forest.  
+   We also extended the analysis by incorporating **XGBoost Gain Importance**, offering a robust, tree-based comparison.  
+   All metrics consistently highlighted `trust`, `impact`, and `service` as the most important drivers of satisfaction.
 
 ---
 
 ### Key Takeaways
 
-- Machine learning is not just about prediction – it's a powerful tool for **explanation and discovery**.
-- K-Means is an intuitive unsupervised method, especially effective when visualized step-by-step.
-- Key Drivers Analysis provides **actionable insight** into what matters most for influencing outcomes.
-- Combining multiple metrics (linear + tree-based + shapley) strengthens the reliability of results.
+- Machine learning is a powerful tool for both **explanation** and **discovery**.
+- **K-means** provides intuitive segmentation, especially when visually stepped through.
+- **Key Drivers Analysis** reveals what matters most in influencing outcomes, especially when using **multiple complementary methods**.
+- The use of **XGBoost** added robustness, while **Shapley values** provided model-agnostic interpretability.
+- Combining **linear, tree-based, and permutation-based metrics** improves confidence in the findings.
 
-Both components of this assignment reinforced how different ML approaches uncover structure in data — whether through clustering or quantifying variable impact. These methods are essential for **segmenting populations** and **prioritizing interventions**, skills valuable in both business and research.
+---
+
+Together, these projects reinforce the value of machine learning for both **segmentation** and **driver identification**.  
+They also highlight the benefit of **triangulating results** across different modeling frameworks to build trust in data-driven decisions.
