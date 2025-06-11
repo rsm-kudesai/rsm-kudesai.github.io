@@ -157,6 +157,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#a.-k-means-clustering-custom-and-scikit-learn" id="toc-a.-k-means-clustering-custom-and-scikit-learn" class="nav-link active" data-scroll-target="#a.-k-means-clustering-custom-and-scikit-learn">1a. K-Means Clustering (Custom and scikit-learn)</a>
   <ul class="collapse">
+  <li><a href="#dataset-overview" id="toc-dataset-overview" class="nav-link" data-scroll-target="#dataset-overview">Dataset Overview</a></li>
   <li><a href="#custom-implementation-of-k-means" id="toc-custom-implementation-of-k-means" class="nav-link" data-scroll-target="#custom-implementation-of-k-means">Custom Implementation of K-Means</a></li>
   <li><a href="#comparison-with-scikit-learns-kmeans" id="toc-comparison-with-scikit-learns-kmeans" class="nav-link" data-scroll-target="#comparison-with-scikit-learns-kmeans">Comparison with <code>scikit-learn</code>’s <code>KMeans</code></a></li>
   <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
@@ -173,7 +174,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#b.-key-drivers-analysis" id="toc-b.-key-drivers-analysis" class="nav-link" data-scroll-target="#b.-key-drivers-analysis">2b. Key Drivers Analysis</a>
   <ul class="collapse">
+  <li><a href="#dataset-overview-1" id="toc-dataset-overview-1" class="nav-link" data-scroll-target="#dataset-overview-1">Dataset Overview</a></li>
   <li><a href="#methods-used" id="toc-methods-used" class="nav-link" data-scroll-target="#methods-used">Methods Used</a></li>
+  <li><a href="#observations" id="toc-observations" class="nav-link" data-scroll-target="#observations">Observations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -214,11 +221,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="a.-k-means-clustering-custom-and-scikit-learn" class="level2">
 <h2 class="anchored" data-anchor-id="a.-k-means-clustering-custom-and-scikit-learn">1a. K-Means Clustering (Custom and scikit-learn)</h2>
-<p>We applied <strong>K-Means clustering</strong> to the Palmer Penguins dataset using two morphological features:<br>
-- <code>bill_length_mm</code> (length of the bill in millimeters)<br>
-- <code>flipper_length_mm</code> (length of the flipper in millimeters)</p>
+<section id="dataset-overview" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-overview">Dataset Overview</h3>
+<p>We use the <strong>Palmer Penguins</strong> dataset, which contains biological measurements for three penguin species in Antarctica. For this exercise, we focus on two numeric features:</p>
+<ul>
+<li><code>bill_length_mm</code>: Length of the penguin’s bill (beak).</li>
+<li><code>flipper_length_mm</code>: Length of the penguin’s flippers.</li>
+</ul>
+<p>These two variables are useful for segmenting penguins based on physical characteristics, mimicking an unsupervised clustering task.</p>
 <p>All features were standardized using <code>StandardScaler</code> to ensure comparable distances between observations.</p>
 <hr>
+</section>
 <section id="custom-implementation-of-k-means" class="level3">
 <h3 class="anchored" data-anchor-id="custom-implementation-of-k-means">Custom Implementation of K-Means</h3>
 <p>We implemented K-Means from scratch, following the standard algorithm:</p>
@@ -231,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Repeat until convergence</li>
 </ol>
-<div id="0e75387f" class="cell" data-execution_count="1">
+<div id="7a5e3f0a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -299,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparison-with-scikit-learns-kmeans" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-with-scikit-learns-kmeans">Comparison with <code>scikit-learn</code>’s <code>KMeans</code></h3>
 <p>The clustering results from both methods were nearly identical, confirming the correctness of our custom implementation.</p>
-<div id="30c8dab5" class="cell" data-execution_count="2">
+<div id="e5dc3e92" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Built-in KMeans clustering for comparison</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_scaled)</span>
@@ -340,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Silhouette Score</strong> – evaluating cluster separation and cohesion</li>
 </ol>
 <p>We calculated both metrics for <code>K = 2</code> through <code>K = 7</code>.</p>
-<div id="6728b982" class="cell" data-execution_count="3">
+<div id="b1dfe133" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -414,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="k-means-cluster-visualizations" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-cluster-visualizations">K-Means Cluster Visualizations</h2>
 <p>Below are the clustering results for different values of K, from 2 to 7. Each figure shows the decision boundaries and centroids.</p>
-<div id="0b3a7a6e" class="cell" data-execution_count="4">
+<div id="d5c58887" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_values:</span>
@@ -479,7 +492,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="k-means-clustering-animation" class="level2">
 <h2 class="anchored" data-anchor-id="k-means-clustering-animation">K-Means Clustering Animation</h2>
 <p>To visually demonstrate how K-means iteratively refines clusters, we created an animation showing how the centroids move and cluster assignments evolve.</p>
-<div id="1f921e85" class="cell" data-execution_count="5">
+<div id="8b7d01d3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Warning: </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss"> not found!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_282897/3126208424.py:11: DeprecationWarning:
+<pre><code>/tmp/ipykernel_311385/3126208424.py:11: DeprecationWarning:
 
 Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning disappear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
 </code></pre>
@@ -520,7 +533,15 @@ Starting with ImageIO v3 the behavior of this function will switch to that of ii
 </section>
 <section id="b.-key-drivers-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="b.-key-drivers-analysis">2b. Key Drivers Analysis</h2>
-<p>We conducted a key driver analysis to identify which perceptual variables most influence consumers’ satisfaction scores. This analysis replicates the approach illustrated on slide 75 of Session 5 using a variety of methods from both linear and tree-based models.</p>
+<section id="dataset-overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-overview-1">Dataset Overview</h3>
+<p>The dataset used for this analysis contains <strong>consumer survey responses</strong> regarding perceptions of a product or brand. Each row corresponds to a unique respondent, and each column captures a perception-related variable (e.g., <code>trust</code>, <code>impact</code>, <code>service</code>, etc.).</p>
+<p>The target variable is <strong><code>satisfaction</code></strong>, a numeric outcome likely measuring how satisfied a customer is with the product or brand. All other columns (excluding identifiers like <code>id</code> and <code>brand</code>) serve as <strong>predictors</strong>, representing different perceived attributes of the offering.</p>
+<blockquote class="blockquote">
+<p><strong>Key Question</strong>: Which attributes most strongly drive consumer satisfaction?</p>
+</blockquote>
+<hr>
+</section>
 <section id="methods-used" class="level3">
 <h3 class="anchored" data-anchor-id="methods-used">Methods Used</h3>
 <p>We included the following variable importance techniques:</p>
@@ -534,19 +555,9 @@ Starting with ImageIO v3 the behavior of this function will switch to that of ii
 <li><strong>XGBoost Permutation Importance</strong> — calculated on an XGBoost regressor using scikit-learn’s permutation importance utility.</li>
 </ul>
 <p>Each metric provides a different lens on variable influence, allowing us to triangulate which predictors consistently emerge as key drivers of satisfaction.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div id="4d3875cb" class="cell" data-execution_count="6">
+<div id="411ed3a5" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Click to expand full driver analysis code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
@@ -612,8 +623,9 @@ Note
 <span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Gini Importance"</span>: np.<span class="bu">round</span>(gini_importance, <span class="dv">3</span>)</span>
 <span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> results_df.sort_values(by<span class="op">=</span><span class="st">"Gini Importance"</span>, ascending<span class="op">=</span><span class="va">False</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div id="05bf2106" class="cell" data-execution_count="7">
+<div id="d55730b4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -755,6 +767,7 @@ Note
 </div>
 </div>
 </div>
+</section>
 <section id="observations" class="level3">
 <h3 class="anchored" data-anchor-id="observations">Observations</h3>
 <ul>
@@ -763,12 +776,28 @@ Note
 <li>The new XGBoost importance metric helps validate the linear models and adds robustness to the conclusions.</li>
 </ul>
 <p>This comprehensive multi-method analysis strengthens the reliability of the key drivers identified and ensures consistency across modeling approaches.</p>
-
-
 </section>
-</div>
-</div>
-</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This assignment showcased two distinct applications of machine learning:</p>
+<ol type="1">
+<li><p><strong>Unsupervised Learning (K-Means)</strong> – We explored the Palmer Penguins dataset to segment penguins using a custom K-Means algorithm. The iterative visualization helped us understand how centroids shift over time, and our results aligned well with the scikit-learn implementation. Both the <strong>Elbow Method</strong> and <strong>Silhouette Score</strong> pointed to <strong>K = 3</strong> as the optimal number of clusters, consistent with the biological species separation.</p></li>
+<li><p><strong>Supervised Learning (Key Drivers Analysis)</strong> – Using the drivers dataset, we quantified the importance of various predictors for “satisfaction” using multiple techniques: Pearson correlation, standardized regression, usefulness (∆R²), Shapley values, Johnson’s relative weights, and tree-based feature importances. We also extended the analysis using <strong>XGBoost permutation importance</strong>, adding robustness and depth.</p></li>
+</ol>
+<hr>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li>Machine learning is not just about prediction – it’s a powerful tool for <strong>explanation and discovery</strong>.</li>
+<li>K-Means is an intuitive unsupervised method, especially effective when visualized step-by-step.</li>
+<li>Key Drivers Analysis provides <strong>actionable insight</strong> into what matters most for influencing outcomes.</li>
+<li>Combining multiple metrics (linear + tree-based + shapley) strengthens the reliability of results.</li>
+</ul>
+<hr>
+<p>Both components of this assignment reinforced how different ML approaches uncover structure in data — whether through clustering or quantifying variable impact. These methods are essential for <strong>segmenting populations</strong> and <strong>prioritizing interventions</strong>, skills valuable in both business and research.</p>
+
+
 </section>
 </section>
 

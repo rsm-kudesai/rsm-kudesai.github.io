@@ -380,6 +380,4 @@ This assignment showcased two distinct applications of machine learning:
 - Key Drivers Analysis provides **actionable insight** into what matters most for influencing outcomes.
 - Combining multiple metrics (linear + tree-based + shapley) strengthens the reliability of results.
 
----
-
 Both components of this assignment reinforced how different ML approaches uncover structure in data — whether through clustering or quantifying variable impact. These methods are essential for **segmenting populations** and **prioritizing interventions**, skills valuable in both business and research.
